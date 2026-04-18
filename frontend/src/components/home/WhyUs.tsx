@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { ShieldCheck, BadgeCheck, DollarSign, Camera, Users, Microscope } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -24,17 +23,13 @@ export default function WhyUs() {
           <p className="mt-4 text-ink-500 text-lg">We only partner with clinics that meet our strict quality standards so you can decide with confidence.</p>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reasons.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="rounded-3xl p-7 bg-white border border-ink-100 hover:border-brand-200 hover:shadow-soft transition-all"
-            >
+          {reasons.map((r) => (
+            <div key={r.title}
+              className="rounded-3xl p-7 bg-white border border-ink-100 hover:border-brand-200 hover:shadow-soft transition-all animate-fade-up">
               <div className={`h-12 w-12 rounded-2xl ${r.color} grid place-items-center`}><r.icon className="h-6 w-6" /></div>
               <h3 className="mt-5 font-display text-lg font-bold text-ink-900">{r.title}</h3>
               <p className="mt-2 text-ink-500 text-sm leading-relaxed">{r.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Container>
@@ -52,7 +47,7 @@ export function CTABand() {
           <div>
             <Eyebrow>Ready to begin?</Eyebrow>
             <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">Your personalized hair journey starts with a free consultation.</h2>
-            <p className="mt-5 text-white/80 text-lg">Tell us about your concern and we&rsquo;ll match you with the right specialists near you — usually within 24 hours.</p>
+            <p className="mt-5 text-white/80 text-lg">Tell us about your concern and we&rsquo;ll match you with the right specialists near you &mdash; usually within 24 hours.</p>
           </div>
           <div className="flex flex-col sm:flex-row md:justify-end gap-3">
             <Link href="/clinics"><Button size="lg" variant="secondary" data-testid="cta-find">Find Clinics</Button></Link>

@@ -1,1 +1,0 @@
-globalThis.__RSC_MANIFEST=(globalThis.__RSC_MANIFEST||{});globalThis.__RSC_MANIFEST["/bff/proxy/[...path]/route"]={"moduleLoading":{"prefix":"/_next/","crossOrigin":null},"ssrModuleMapping":{},"edgeSSRModuleMapping":{},"clientModules":{},"entryCSSFiles":{"/app/frontend/src/":[],"/app/frontend/src/app/bff/proxy/[...path]/route":[]},"rscModuleMapping":{},"edgeRscModuleMapping":{}}

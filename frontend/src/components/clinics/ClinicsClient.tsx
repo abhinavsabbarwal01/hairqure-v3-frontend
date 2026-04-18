@@ -1,38 +1,36 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Search, MapPin, Star, SlidersHorizontal, Award } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
-import { discoverClinics, getCities, type Clinic, type City } from "@/lib/api";
+import type { City, Clinic } from "@/lib/api.server";
 import { slugify } from "@/lib/utils";
 
 const chips = ["All", "Hair Transplant", "PRP", "GFC", "Scalp", "Consultation"];
 
-export default function ClinicsClient() {
-  const [cities, setCities] = useState<City[]>([]);
-  const [cityId, setCityId] = useState<string | number>(1);
-  const [clinics, setClinics] = useState<Clinic[]>([]);
-  const [loading, setLoading] = useState(true);
+interface Props {
+  initialCities: City[];
+  initialClinics: Clinic[];
+  initialCitySlug?: string;
+}
+
+export default function ClinicsClient({ initialCities, initialClinics, initialCitySlug }: Props) {
+  const matchedCity = initialCities.find(c => slugify(c.cityName) === initialCitySlug);
+  const [cityName, setCityName] = useState<string>(matchedCity?.cityName || initialCities[0]?.cityName || "Delhi");
   const [q, setQ] = useState("");
   const [chip, setChip] = useState("All");
   const [sort, setSort] = useState("rating");
 
-  useEffect(() => { getCities().then(r => setCities(r?.data ?? [])).catch(() => {}); }, []);
-
-  useEffect(() => {
-    setLoading(true);
-    discoverClinics(cityId).then(d => setClinics(d ?? [])).catch(() => setClinics([])).finally(() => setLoading(false));
-  }, [cityId]);
-
   const filtered = useMemo(() => {
-    let list = clinics.filter(c => c.name?.toLowerCase().includes(q.toLowerCase()));
+    let list = initialClinics.filter(c => (c.cityName ?? c.city ?? "").toLowerCase() === cityName.toLowerCase() || !cityName);
+    if (list.length === 0) list = initialClinics; // show all if nothing matches city filter
+    list = list.filter(c => c.name?.toLowerCase().includes(q.toLowerCase()));
     if (chip !== "All") list = list.filter(c => (c.treatments ?? c.services ?? []).some(s => s.toLowerCase().includes(chip.toLowerCase())));
-    if (sort === "rating") list = [...list].sort((a, b) => (Number(b.averageRating ?? b.rating ?? 0)) - (Number(a.averageRating ?? a.rating ?? 0)));
+    if (sort === "rating") list = [...list].sort((a, b) => Number(b.averageRating ?? b.rating ?? 0) - Number(a.averageRating ?? a.rating ?? 0));
     if (sort === "name") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [clinics, q, chip, sort]);
+  }, [initialClinics, cityName, q, chip, sort]);
 
   return (
     <Section className="bg-ink-50 min-h-screen">
@@ -48,9 +46,9 @@ export default function ClinicsClient() {
           </div>
           <div className="flex items-center gap-2 px-3 border border-ink-100 rounded-2xl">
             <MapPin className="h-4 w-4 text-brand-600" />
-            <select data-testid="clinics-city" value={String(cityId)} onChange={e => setCityId(e.target.value)} className="w-full py-3 bg-transparent focus:outline-none text-sm font-medium">
-              {cities.length === 0 && <option value="1">Delhi</option>}
-              {cities.map(c => <option key={String(c.cityId)} value={String(c.cityId)}>{c.cityName}</option>)}
+            <select data-testid="clinics-city" value={cityName} onChange={e => setCityName(e.target.value)} className="w-full py-3 bg-transparent focus:outline-none text-sm font-medium">
+              {initialCities.length === 0 && <option value="Delhi">Delhi</option>}
+              {initialCities.map(c => <option key={String(c.cityId)} value={c.cityName}>{c.cityName}</option>)}
             </select>
           </div>
           <div className="flex items-center gap-2 px-3 border border-ink-100 rounded-2xl">
@@ -71,13 +69,10 @@ export default function ClinicsClient() {
           ))}
         </div>
 
-        <p className="mt-6 text-sm text-ink-500">{loading ? "Loading..." : `${filtered.length} clinic${filtered.length === 1 ? "" : "s"} found`}</p>
+        <p className="mt-6 text-sm text-ink-500">{filtered.length} clinic{filtered.length === 1 ? "" : "s"} found</p>
 
         <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loading && Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="rounded-3xl bg-white p-5 border border-ink-100"><div className="skeleton h-44 rounded-2xl" /><div className="skeleton h-5 w-2/3 mt-4 rounded-full" /></div>
-          ))}
-          {!loading && filtered.map((c, i) => {
+          {filtered.map((c, i) => {
             const id = c.clinicId ?? c.id ?? i;
             const city = c.cityName ?? c.city ?? "delhi";
             const slug = `${slugify(c.name)}-${id}`;
@@ -96,7 +91,7 @@ export default function ClinicsClient() {
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-bold text-ink-900 group-hover:text-brand-600 transition-colors">{c.name}</h3>
-                  <p className="mt-1 flex items-center gap-1 text-sm text-ink-500"><MapPin className="h-3.5 w-3.5" /> {c.address ?? String(city)}</p>
+                  <p className="mt-1 flex items-center gap-1 text-sm text-ink-500"><MapPin className="h-3.5 w-3.5" /><span className="line-clamp-1">{c.address ?? c.areaName ?? String(city)}</span></p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {services.map(s => <span key={s} className="text-xs font-medium px-2.5 py-1 rounded-full bg-brand-50 text-brand-700">{s}</span>)}
                   </div>
@@ -104,7 +99,7 @@ export default function ClinicsClient() {
               </Link>
             );
           })}
-          {!loading && filtered.length === 0 && <p className="col-span-full text-center text-ink-500 py-10">No clinics match your filters.</p>}
+          {filtered.length === 0 && <p className="col-span-full text-center text-ink-500 py-10">No clinics match your filters.</p>}
         </div>
       </Container>
     </Section>

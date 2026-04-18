@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { Scissors, Sparkles, FlaskConical, ArrowRight } from "lucide-react";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
@@ -20,14 +19,10 @@ export default function Treatments() {
           <p className="mt-4 text-ink-500 text-lg">From surgical restoration to regenerative therapies, explore what&rsquo;s available at top clinics near you.</p>
         </div>
         <div className="mt-12 grid md:grid-cols-3 gap-6">
-          {items.map((it, i) => (
-            <motion.div
-              key={it.title}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group relative rounded-3xl p-8 bg-white border border-ink-100 hover:border-brand-300 transition-all hover:shadow-soft"
-              data-testid={`treatment-${it.title.toLowerCase().replace(/\s/g, "-")}`}
-            >
+          {items.map((it) => (
+            <div key={it.title}
+              className="group relative rounded-3xl p-8 bg-white border border-ink-100 hover:border-brand-300 transition-all hover:shadow-soft animate-fade-up"
+              data-testid={`treatment-${it.title.toLowerCase().replace(/\s/g, "-")}`}>
               <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${it.tint} grid place-items-center text-white shadow-glow`}>
                 <it.icon className="h-6 w-6" />
               </div>
@@ -36,7 +31,7 @@ export default function Treatments() {
               <Link href="/clinics" className="mt-6 inline-flex items-center gap-1 text-brand-600 font-semibold text-sm group-hover:gap-2 transition-all">
                 Find clinics <ArrowRight className="h-4 w-4" />
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Container>

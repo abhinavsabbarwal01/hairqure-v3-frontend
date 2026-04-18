@@ -1,28 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-// framer-motion removed from hero for SSR visibility; using CSS animations
-const motion = { div: "div", h1: "h1", p: "p", form: "form" } as unknown as Record<string, React.ElementType>;
-import { Search, MapPin, ShieldCheck, Sparkles, Star, ArrowRight } from "lucide-react";
+import { Search, MapPin, ShieldCheck, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { getCities, type City } from "@/lib/api";
+import type { City } from "@/lib/api.server";
 import { slugify } from "@/lib/utils";
 
-export default function Hero() {
-  const [cities, setCities] = useState<City[]>([]);
+export default function Hero({ initialCities = [] }: { initialCities?: City[] }) {
   const [city, setCity] = useState("");
   const router = useRouter();
-
-  useEffect(() => {
-    getCities().then((r) => setCities(r?.data ?? [])).catch(() => {
-      setCities([
-        { cityId: 1, cityName: "Delhi" },
-        { cityId: 2, cityName: "Gurgaon" },
-        { cityId: 3, cityName: "Noida" },
-      ]);
-    });
-  }, []);
+  const cities = initialCities.length ? initialCities : [{ cityId: 1, cityName: "Delhi" }, { cityId: 2, cityName: "Gurgaon" }, { cityId: 3, cityName: "Noida" }];
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,62 +23,37 @@ export default function Hero() {
       <div className="orb bg-accent-mint h-80 w-80 top-32 -right-24 opacity-30" />
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28 relative">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3 py-1 text-xs font-semibold tracking-widest text-brand-700 uppercase shadow-sm">
-                <ShieldCheck className="h-3.5 w-3.5" /> India&rsquo;s trusted hair marketplace
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
-              className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] text-ink-900"
-            >
+          <div className="lg:col-span-7 animate-fade-up">
+            <span className="inline-flex items-center gap-2 rounded-full border border-ink-200 bg-white px-3 py-1 text-xs font-semibold tracking-widest text-brand-700 uppercase shadow-sm">
+              <ShieldCheck className="h-3.5 w-3.5" /> India&rsquo;s trusted hair marketplace
+            </span>
+            <h1 className="mt-5 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] text-ink-900">
               Regain your hair <span className="text-gradient">with confidence.</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
-              className="mt-5 max-w-xl text-lg text-ink-500"
-            >
+            </h1>
+            <p className="mt-5 max-w-xl text-lg text-ink-500">
               Compare verified clinics, meet certified specialists, and see real before/after results. Transparent pricing, zero guesswork.
-            </motion.p>
-
-            <motion.form
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}
-              onSubmit={onSubmit}
-              data-testid="hero-search"
-              className="mt-8 flex flex-col sm:flex-row gap-3 p-2 bg-white rounded-2xl sm:rounded-full shadow-soft border border-ink-100 max-w-xl"
-            >
+            </p>
+            <form onSubmit={onSubmit} data-testid="hero-search"
+              className="mt-8 flex flex-col sm:flex-row gap-3 p-2 bg-white rounded-2xl sm:rounded-full shadow-soft border border-ink-100 max-w-xl">
               <div className="flex items-center gap-2 flex-1 px-4">
                 <MapPin className="h-5 w-5 text-brand-600 shrink-0" />
-                <select
-                  data-testid="hero-city"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="w-full bg-transparent py-3 text-ink-800 font-medium focus:outline-none"
-                >
+                <select data-testid="hero-city" value={city} onChange={(e) => setCity(e.target.value)}
+                  className="w-full bg-transparent py-3 text-ink-800 font-medium focus:outline-none">
                   <option value="">Select your city</option>
-                  {cities.map((c) => (
-                    <option key={String(c.cityId)} value={c.cityName}>{c.cityName}</option>
-                  ))}
+                  {cities.map((c) => <option key={String(c.cityId)} value={c.cityName}>{c.cityName}</option>)}
                 </select>
               </div>
               <Button type="submit" size="lg" data-testid="hero-submit" className="gap-2">
                 <Search className="h-4 w-4" /> Find Clinics
               </Button>
-            </motion.form>
-
+            </form>
             <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-ink-500">
               <div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-accent-mint" /> 100+ verified clinics</div>
               <div className="flex items-center gap-2"><Star className="h-4 w-4 text-accent-amber fill-accent-amber" /> 4.8 avg patient rating</div>
               <div className="flex items-center gap-2"><Sparkles className="h-4 w-4 text-brand-600" /> Real before/after</div>
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative"
-          >
+          <div className="lg:col-span-5 relative animate-fade-up">
             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-glow bg-gradient-to-br from-brand-600 to-brand-800">
               <div className="absolute inset-0 grain opacity-40" />
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
@@ -111,13 +73,12 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="bg-white border-y border-ink-100">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-xs font-semibold tracking-widest text-ink-400 uppercase">
-          <span>As featured in</span>
-          <span>YourStory</span><span>Times of India</span><span>Mint</span><span>Inc42</span><span>ET Health</span>
+          <span>As featured in</span><span>YourStory</span><span>Times of India</span><span>Mint</span><span>Inc42</span><span>ET Health</span>
         </div>
       </div>
     </section>

@@ -37,8 +37,8 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-bold text-white mb-4">Get in touch</h4>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-brand-300" /> hello@hairqure.com</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-brand-300" /> Delhi NCR, India</li>
+              <li className="flex items-center gap-2"><Mail className="h-4 w-4 text-brand-300" /><span>hello@hairqure.com</span></li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-brand-300" /><span>Delhi NCR, India</span></li>
             </ul>
           </div>
         </div>
