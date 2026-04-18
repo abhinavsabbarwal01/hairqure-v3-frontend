@@ -10,11 +10,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/clinic/[city]/[slug]/page.js"
-    ],
-    "/clinics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/clinics/page.js"
     ]
   }
 }

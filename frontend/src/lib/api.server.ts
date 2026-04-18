@@ -129,3 +129,25 @@ export async function sGetDoctorsByClinic(id: string | number) {
     return d?.data ?? [];
   } catch { return []; }
 }
+
+export interface ServicePackage {
+  id: number;
+  clinicServiceId: number;
+  sessionsCount: number;
+  totalPrice: number;
+  discountPercent: number;
+  isActive: boolean;
+}
+
+export async function sGetServicePackages(serviceId: string | number): Promise<ServicePackage[]> {
+  try {
+    const t = await token();
+    const r = await fetch(`${UPSTREAM}/api/v1/service-packages?serviceId=${serviceId}`, {
+      headers: { Authorization: `Bearer ${t}` },
+      next: { revalidate: 600 },
+    });
+    if (!r.ok) return [];
+    const d = await r.json();
+    return (d?.data ?? []) as ServicePackage[];
+  } catch { return []; }
+}
