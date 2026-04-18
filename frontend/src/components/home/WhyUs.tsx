@@ -17,7 +17,7 @@ export default function WhyUs() {
   return (
     <Section className="bg-white">
       <Container>
-        <div className="text-center max-w-2xl mx-auto">
+        <div className="max-w-2xl">
           <Eyebrow>Why HairQure</Eyebrow>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900">Built on trust. Engineered for outcomes.</h2>
           <p className="mt-4 text-ink-500 text-lg">We only partner with clinics that meet our strict quality standards so you can decide with confidence.</p>
