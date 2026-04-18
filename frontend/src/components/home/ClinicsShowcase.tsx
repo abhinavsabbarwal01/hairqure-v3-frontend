@@ -15,7 +15,7 @@ export default function ClinicsShowcase({ initialClinics = [] }: { initialClinic
             <Eyebrow>Top clinics</Eyebrow>
             <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-ink-900">Hand-picked, verified clinics in Delhi NCR.</h2>
           </div>
-          <Link href="/clinics"><Button variant="outline" data-testid="view-all-clinics">View all clinics <ArrowRight className="h-4 w-4" /></Button></Link>
+          <Link href="/clinics" className="hidden md:block"><Button variant="outline" data-testid="view-all-clinics">View all clinics <ArrowRight className="h-4 w-4" /></Button></Link>
         </div>
 
         <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -29,10 +29,12 @@ export default function ClinicsShowcase({ initialClinics = [] }: { initialClinic
             const img = c.thumbnailUrls?.[0] ?? c.imageUrl ?? c.image;
             const rating = c.averageRating ?? c.rating ?? 4.7;
             const services = (c.treatments ?? c.services ?? ["Hair Transplant", "PRP", "GFC"]).slice(0, 3);
+            // Mobile: show only first 2 clinics. Tablet/Desktop: show all.
+            const mobileHide = i >= 2 ? "hidden sm:block" : "";
             return (
               <Link key={String(id) + i} href={`/clinic/${slugify(String(city))}/${slug}`}
                 data-testid={`home-clinic-${i}`}
-                className="group block rounded-3xl bg-white overflow-hidden border border-ink-100 hover:border-brand-300 hover:shadow-soft transition-all">
+                className={`group block rounded-3xl bg-white overflow-hidden border border-ink-100 hover:border-brand-300 hover:shadow-soft transition-all ${mobileHide}`}>
                 <div className="relative h-48 bg-ink-100 overflow-hidden">
                   {img ? (
                     <Image src={img} alt={c.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:768px) 100vw, 33vw" unoptimized />
@@ -55,6 +57,13 @@ export default function ClinicsShowcase({ initialClinics = [] }: { initialClinic
               </Link>
             );
           })}
+        </div>
+
+        {/* Mobile-only "View all" CTA below the 2 visible clinics */}
+        <div className="mt-8 sm:hidden">
+          <Link href="/clinics" data-testid="mobile-view-all-clinics">
+            <Button variant="outline" className="w-full">View all clinics <ArrowRight className="h-4 w-4" /></Button>
+          </Link>
         </div>
       </Container>
     </Section>

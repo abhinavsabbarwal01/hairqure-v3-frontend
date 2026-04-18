@@ -508,6 +508,9 @@ video {
 .pointer-events-auto {
   pointer-events: auto;
 }
+.visible {
+  visibility: visible;
+}
 .fixed {
   position: fixed;
 }
@@ -1822,6 +1825,10 @@ body { font-family: var(--font-inter, 'Inter'), system-ui, sans-serif; color: #0
     display: block;
   }
 
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:h-14 {
     height: 3.5rem;
   }
@@ -1875,6 +1882,10 @@ body { font-family: var(--font-inter, 'Inter'), system-ui, sans-serif; color: #0
   }
 }
 @media (min-width: 768px) {
+
+  .md\:block {
+    display: block;
+  }
 
   .md\:inline {
     display: inline;
