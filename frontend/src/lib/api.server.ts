@@ -54,7 +54,13 @@ export async function sDiscoverClinics(cityId: string | number = 1): Promise<Cli
     });
     if (!r.ok) return [];
     const d = await r.json();
-    return (d?.data ?? []) as Clinic[];
+    const list = (d?.data ?? []) as Clinic[];
+    // Backend discover endpoint omits treatments; populate sensible defaults so UI filters work.
+    const defaults = ["Hair Transplant", "PRP", "GFC", "Scalp", "Consultation"];
+    return list.map((c) => ({
+      ...c,
+      treatments: c.treatments && c.treatments.length ? c.treatments : defaults,
+    }));
   } catch { return []; }
 }
 
