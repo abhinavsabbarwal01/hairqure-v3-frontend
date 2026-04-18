@@ -1,4 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/clinics/page": "app/clinics/page.js"
+  "/bff/proxy/[...path]/route": "app/bff/proxy/[...path]/route.js"
 }

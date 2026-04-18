@@ -1,20 +1,9 @@
 {
   "pages": {
-    "/layout": [
+    "/bff/proxy/[...path]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/clinics/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/clinics/page.js"
+      "static/chunks/app/bff/proxy/[...path]/route.js"
     ]
   }
 }

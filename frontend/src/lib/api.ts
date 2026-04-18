@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.hairqure.com";
+const BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "/bff/proxy";
 const TOKEN_TTL = 23 * 60 * 60 * 1000;
 
 const api = axios.create({
