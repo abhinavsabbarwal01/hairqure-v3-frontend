@@ -4,9 +4,9 @@ import { Scissors, Sparkles, FlaskConical, ArrowRight } from "lucide-react";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
 
 const items = [
-  { icon: Scissors, title: "Hair Transplant", desc: "Advanced FUE & DHI for natural-looking, permanent restoration.", tint: "from-brand-500 to-brand-700" },
-  { icon: Sparkles, title: "PRP Therapy", desc: "Platelet-rich plasma stimulation for faster regrowth with no downtime.", tint: "from-accent-mint to-brand-500" },
-  { icon: FlaskConical, title: "GFC Treatment", desc: "Growth Factor Concentrate therapy for follicle regeneration.", tint: "from-accent-amber to-accent-rose" },
+  { icon: Scissors, title: "Hair Transplant", desc: "Advanced FUE & DHI for natural-looking, permanent restoration.", tint: "bg-brand-50 border-brand-100 hover:border-brand-300", iconBg: "from-brand-500 to-brand-700" },
+  { icon: Sparkles, title: "PRP Therapy", desc: "Platelet-rich plasma stimulation for faster regrowth with no downtime.", tint: "bg-emerald-50 border-emerald-100 hover:border-emerald-300", iconBg: "from-accent-mint to-brand-500" },
+  { icon: FlaskConical, title: "GFC Treatment", desc: "Growth Factor Concentrate therapy for follicle regeneration.", tint: "bg-amber-50 border-amber-100 hover:border-amber-300", iconBg: "from-accent-amber to-accent-rose" },
 ];
 
 export default function Treatments() {
@@ -21,14 +21,14 @@ export default function Treatments() {
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {items.map((it) => (
             <div key={it.title}
-              className="group relative rounded-3xl p-8 bg-white border border-ink-100 hover:border-brand-300 transition-all hover:shadow-soft animate-fade-up"
+              className={`group relative rounded-3xl p-8 border transition-all hover:shadow-soft hover:-translate-y-1 animate-fade-up ${it.tint}`}
               data-testid={`treatment-${it.title.toLowerCase().replace(/\s/g, "-")}`}>
-              <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${it.tint} grid place-items-center text-white shadow-glow`}>
+              <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${it.iconBg} grid place-items-center text-white shadow-glow`}>
                 <it.icon className="h-6 w-6" />
               </div>
               <h3 className="mt-6 font-display text-xl font-bold text-ink-900">{it.title}</h3>
-              <p className="mt-2 text-ink-500">{it.desc}</p>
-              <Link href="/clinics" className="mt-6 inline-flex items-center gap-1 text-brand-600 font-semibold text-sm group-hover:gap-2 transition-all">
+              <p className="mt-2 text-ink-600">{it.desc}</p>
+              <Link href="/clinics" className="mt-6 inline-flex items-center gap-1 text-brand-700 font-semibold text-sm group-hover:gap-2 transition-all">
                 Find clinics <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

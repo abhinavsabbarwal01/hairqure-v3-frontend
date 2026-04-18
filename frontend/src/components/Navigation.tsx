@@ -29,12 +29,13 @@ export default function Navigation() {
       data-testid="site-nav"
       className={cn(
         "fixed top-0 inset-x-0 z-40 transition-all duration-300",
-        scrolled ? "backdrop-blur-xl bg-white/80 shadow-soft" : "bg-transparent"
+        scrolled ? "backdrop-blur-xl bg-white/95 shadow-soft" : "backdrop-blur-md bg-white/80"
       )}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 flex h-18 md:h-20 items-center justify-between py-3">
-        <Link href="/" className="flex items-center gap-2" data-testid="nav-logo">
-          <Image src="/logo.png" alt="HairQure" width={140} height={36} priority className="h-8 w-auto" />
+        <Link href="/" className="flex items-center gap-2.5" data-testid="nav-logo">
+          <Image src="/apple-touch-icon.png" alt="HairQure" width={40} height={40} priority className="h-9 w-9 rounded-xl shadow-sm" />
+          <span className="hidden md:inline font-display text-xl font-extrabold text-brand-700 tracking-tight">HairQure</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

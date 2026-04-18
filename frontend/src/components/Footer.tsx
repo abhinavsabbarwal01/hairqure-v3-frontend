@@ -8,7 +8,10 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Image src="/logo.png" alt="HairQure" width={140} height={36} className="h-8 w-auto brightness-0 invert opacity-90" />
+            <div className="flex items-center gap-2">
+              <Image src="/apple-touch-icon.png" alt="HairQure" width={36} height={36} className="h-8 w-8 rounded-lg" />
+              <span className="font-display text-lg font-extrabold text-white tracking-tight">HairQure</span>
+            </div>
             <p className="mt-4 text-sm text-ink-300 max-w-xs">India&rsquo;s trusted marketplace for verified hair clinics &mdash; transparent pricing, real results, expert specialists.</p>
             <div className="mt-5 flex gap-3">
               <a aria-label="Instagram" href="#" className="p-2 rounded-full bg-white/5 hover:bg-brand-600 transition"><Instagram className="h-4 w-4" /></a>
