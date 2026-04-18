@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 220 40% 10%;
+  --brand: 226 82% 50%;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-inter, 'Inter'), system-ui, sans-serif; color: #0b1629; background: #ffffff; }
+
+/* selection */
+::selection { background: #1a4fe6; color: #fff; }
+
+/* grain */
+.grain { position: relative; }
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.35; mix-blend-mode: overlay;
+}
+
+/* gradient text */
+.text-gradient {
+  background: linear-gradient(90deg, #0b1629 0%, #1a4fe6 55%, #22c1a4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg, #eef2f8 0%, #f7f9fc 50%, #eef2f8 100%);
+  background-size: 200% 100%; animation: shimmer 2.4s linear infinite;
+}
+
+/* focus ring */
+.focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 4px rgb(26 79 230 / 0.18); }
+
+/* hero glow orbs */
+.orb { filter: blur(60px); opacity: 0.55; border-radius: 9999px; position: absolute; }

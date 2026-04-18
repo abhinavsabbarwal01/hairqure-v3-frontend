@@ -1,0 +1,74 @@
+# HairQure - Hair Clinics & Treatments
+# Optimized for Google, Bing, and other search engines
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap locations
+Sitemap: https://www.hairqure.com/sitemap.xml
+
+# Disallow sensitive and unnecessary routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
+
+Disallow: /404
+Disallow: /500
+
+# Allow important directories and pages
+Allow: /clinics/
+Allow: /clinic/
+Allow: /treatments/
+Allow: /about/
+Allow: /contact/
+Allow: /faq/
+Allow: /hair-transplant-cost/
+Allow: /before-after-results/
+
+# Google-specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Mobile
+Allow: /
+Crawl-delay: 1
+
+# Bing-specific rules
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: msnbot
+Allow: /
+Crawl-delay: 1
+
+# Yahoo/Slurp
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# DuckDuckBot
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# General crawl delay for other bots
+Crawl-delay: 3 
