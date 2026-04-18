@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+// framer-motion removed from hero for SSR visibility; using CSS animations
+const motion = { div: "div", h1: "h1", p: "p", form: "form" } as unknown as Record<string, React.ElementType>;
 import { Search, MapPin, ShieldCheck, Sparkles, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { getCities, type City } from "@/lib/api";
