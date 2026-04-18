@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, MapPin, ShieldCheck, Star, Sparkles } from "lucide-react";
@@ -32,15 +33,13 @@ export default function Hero({ initialCities = [] }: { initialCities?: City[] })
       {/* subtle glow */}
       <div className="orb bg-brand-400 h-96 w-96 -top-24 -left-24 opacity-50" />
       <div className="orb bg-accent-mint h-80 w-80 top-40 -right-24 opacity-20" />
-      {/* animated hair strands (decorative, match prod motif) */}
+      {/* decorative hair follicles (from brand SVG) */}
       {strands.map((s, i) => (
-        <svg key={i} aria-hidden="true"
-          className="absolute text-white/25 animate-float pointer-events-none"
+        <Image key={i} src="/hair-follicle.svg" alt="" aria-hidden="true"
+          width={22} height={34} unoptimized
+          className="absolute animate-float pointer-events-none opacity-20 mix-blend-screen"
           style={{ left: s.l, top: s.t, animationDelay: s.d, width: `${22 * s.s}px`, height: `${34 * s.s}px` }}
-          viewBox="0 0 22 34" fill="none">
-          <path d="M11 1 C 14 6, 18 10, 18 18 C 18 26, 14 31, 11 33 C 8 31, 4 26, 4 18 C 4 10, 8 6, 11 1 Z" fill="currentColor" opacity=".85" />
-          <circle cx="11" cy="5" r="1.5" fill="currentColor" />
-        </svg>
+        />
       ))}
 
       <div className="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28 relative text-center animate-fade-up">

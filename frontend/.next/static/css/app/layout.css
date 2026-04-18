@@ -1345,6 +1345,9 @@ video {
 .opacity-50 {
   opacity: 0.5;
 }
+.mix-blend-screen {
+  mix-blend-mode: screen;
+}
 .shadow-glow {
   --tw-shadow: 0 20px 60px -20px rgb(26 79 230 / 0.45);
   --tw-shadow-colored: 0 20px 60px -20px var(--tw-shadow-color);
