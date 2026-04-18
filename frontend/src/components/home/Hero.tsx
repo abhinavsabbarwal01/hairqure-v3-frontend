@@ -64,10 +64,13 @@ export default function Hero({ initialCities = [] }: { initialCities?: City[] })
         </div>
       </div>
 
-      {/* press strip */}
+      {/* press strip — scrollable on mobile, wrapped on desktop */}
       <div className="bg-white border-y border-ink-100">
-        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-[11px] font-semibold tracking-[0.2em] text-ink-400 uppercase">
-          <span>As featured in</span><span>YourStory</span><span>Times of India</span><span>Mint</span><span>Inc42</span><span>ET Health</span>
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-5 overflow-x-auto">
+          <div className="flex items-center justify-start md:justify-center gap-x-8 lg:gap-x-10 gap-y-3 text-[11px] font-semibold tracking-[0.2em] text-ink-400 uppercase whitespace-nowrap">
+            <span className="text-ink-500">As featured in</span>
+            <span>YourStory</span><span>Times of India</span><span>Mint</span><span>Inc42</span><span>ET Health</span>
+          </div>
         </div>
       </div>
     </section>

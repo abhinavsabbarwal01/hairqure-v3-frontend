@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="min-h-screen bg-white text-ink-800 antialiased">
         <Navigation />
-        <main className="pt-20">{children}</main>
+        <main className="pt-20 pb-28 md:pb-0">{children}</main>
         <LeadModal />
         <Footer />
       </body>

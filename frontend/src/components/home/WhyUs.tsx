@@ -47,13 +47,13 @@ export function CTABand() {
           <Eyebrow>Ready to begin?</Eyebrow>
           <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">Your personalized hair journey starts with a free consultation.</h2>
           <p className="mt-5 text-white/80 text-lg max-w-2xl">Tell us about your concern and we&rsquo;ll match you with the right specialists near you &mdash; usually within 24 hours.</p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link href="/clinics" data-testid="cta-find"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-700 font-semibold h-14 px-8 text-base shadow-glow hover:-translate-y-0.5 hover:shadow-xl transition-all">
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-700 font-semibold h-13 sm:h-14 px-6 sm:px-8 text-base shadow-glow hover:-translate-y-0.5 hover:shadow-xl transition-all">
               Find Clinics <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a href="https://wa.me/918650801405" target="_blank" rel="noopener" data-testid="cta-wa"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/5 backdrop-blur text-white font-semibold h-14 px-8 text-base hover:bg-white/15 hover:border-white/60 transition-all">
+              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/5 backdrop-blur text-white font-semibold h-13 sm:h-14 px-6 sm:px-8 text-base hover:bg-white/15 hover:border-white/60 transition-all">
               <MessageCircle className="h-5 w-5 text-[#25D366]" /> Chat on WhatsApp
             </a>
           </div>
