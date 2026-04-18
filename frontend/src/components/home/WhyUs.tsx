@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ShieldCheck, BadgeCheck, DollarSign, Camera, Users, Microscope } from "lucide-react";
+import { ShieldCheck, BadgeCheck, DollarSign, Camera, Users, Microscope, ArrowRight, MessageCircle, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
 
@@ -43,15 +43,24 @@ export function CTABand() {
       <div className="orb bg-accent-mint h-80 w-80 -top-10 -left-10 opacity-30" />
       <div className="orb bg-accent-amber h-80 w-80 -bottom-20 -right-10 opacity-25" />
       <Container>
-        <div className="relative grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <Eyebrow>Ready to begin?</Eyebrow>
-            <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">Your personalized hair journey starts with a free consultation.</h2>
-            <p className="mt-5 text-white/80 text-lg">Tell us about your concern and we&rsquo;ll match you with the right specialists near you &mdash; usually within 24 hours.</p>
+        <div className="relative max-w-3xl">
+          <Eyebrow>Ready to begin?</Eyebrow>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">Your personalized hair journey starts with a free consultation.</h2>
+          <p className="mt-5 text-white/80 text-lg max-w-2xl">Tell us about your concern and we&rsquo;ll match you with the right specialists near you &mdash; usually within 24 hours.</p>
+          <div className="mt-10 flex flex-col sm:flex-row gap-3">
+            <Link href="/clinics" data-testid="cta-find"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-brand-700 font-semibold h-14 px-8 text-base shadow-glow hover:-translate-y-0.5 hover:shadow-xl transition-all">
+              Find Clinics <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <a href="https://wa.me/918650801405" target="_blank" rel="noopener" data-testid="cta-wa"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/5 backdrop-blur text-white font-semibold h-14 px-8 text-base hover:bg-white/15 hover:border-white/60 transition-all">
+              <MessageCircle className="h-5 w-5 text-[#25D366]" /> Chat on WhatsApp
+            </a>
           </div>
-          <div className="flex flex-col sm:flex-row md:justify-end gap-3">
-            <Link href="/clinics"><Button size="lg" variant="secondary" data-testid="cta-find">Find Clinics</Button></Link>
-            <a href="https://wa.me/918650801405" target="_blank" rel="noopener"><Button size="lg" className="bg-white text-brand-700 hover:bg-ink-50" data-testid="cta-wa">Chat on WhatsApp</Button></a>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/70">
+            <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-accent-mint" /> Free consultation</span>
+            <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-accent-mint" /> No obligation</span>
+            <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-accent-mint" /> Reply in 24 hours</span>
           </div>
         </div>
       </Container>
