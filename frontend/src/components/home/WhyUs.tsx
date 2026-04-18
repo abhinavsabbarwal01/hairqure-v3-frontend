@@ -15,7 +15,7 @@ const reasons = [
 
 export default function WhyUs() {
   return (
-    <Section className="bg-ink-50/70">
+    <Section className="bg-white">
       <Container>
         <div className="max-w-2xl">
           <Eyebrow>Why HairQure</Eyebrow>
