@@ -77,6 +77,46 @@ export async function sGetClinicDetails(id: string | number) {
   } catch { return null; }
 }
 
+export interface ClinicService {
+  id: number;
+  basePrice?: number;
+  durationMinutes?: number;
+  description?: string;
+  serviceName?: string;
+  service?: { id: number; name: string; shortCode?: string; description?: string };
+  beforeAfterImages?: Array<{ id: number; beforeImageUrl: string; afterImageUrl: string; description?: string }>;
+}
+export interface ClinicDetails {
+  id: number | string;
+  name: string;
+  description?: string;
+  city?: string;
+  state?: string;
+  area?: string;
+  pincode?: string;
+  address?: string;
+  averageRating?: number;
+  clinicOpenTime?: string;
+  clinicCloseTime?: string;
+  daysClinicsOpen?: string;
+  totalExperience?: number;
+  googleMapUrl?: string;
+  services?: ClinicService[];
+  thumbnailUrls?: string[];
+}
+export interface Doctor {
+  id: number | string;
+  firstName: string;
+  lastName: string;
+  specialization?: string;
+  experienceYears?: number;
+  profileImageUrl?: string;
+  bio?: string;
+  qualifications?: Array<{ id: number; degree: string; institution?: string; year?: number }>;
+  achievements?: Array<{ id: number; title: string; description?: string; year?: number }>;
+  certifications?: Array<{ id: number; name: string; issuingBody?: string; year?: number }>;
+}
+
 export async function sGetDoctorsByClinic(id: string | number) {
   try {
     const t = await token();
