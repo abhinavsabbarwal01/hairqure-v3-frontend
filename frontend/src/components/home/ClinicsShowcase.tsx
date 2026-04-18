@@ -8,7 +8,7 @@ import { slugify } from "@/lib/utils";
 
 export default function ClinicsShowcase({ initialClinics = [] }: { initialClinics?: Clinic[] }) {
   return (
-    <Section className="bg-gradient-to-b from-brand-50 to-white" id="clinics">
+    <Section className="bg-brand-50/70" id="clinics">
       <Container>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div className="max-w-xl">
