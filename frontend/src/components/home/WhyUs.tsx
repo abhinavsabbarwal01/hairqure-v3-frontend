@@ -40,8 +40,8 @@ export default function WhyUs() {
 export function CTABand() {
   return (
     <Section className="relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-ink-900 text-white">
-      <div className="orb bg-accent-mint h-80 w-80 -top-10 -left-10 opacity-30" />
-      <div className="orb bg-accent-amber h-80 w-80 -bottom-20 -right-10 opacity-25" />
+      <div className="orb bg-accent-mint h-80 w-80 -top-10 -left-10 opacity-25" />
+      <div className="orb bg-brand-400 h-96 w-96 -bottom-24 -right-16 opacity-30" />
       <Container>
         <div className="relative max-w-3xl">
           <Eyebrow>Ready to begin?</Eyebrow>
