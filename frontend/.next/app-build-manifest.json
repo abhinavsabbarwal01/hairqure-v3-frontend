@@ -15,6 +15,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/clinics/page.js"
+    ],
+    "/bff/proxy/[...path]/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/bff/proxy/[...path]/route.js"
     ]
   }
 }
