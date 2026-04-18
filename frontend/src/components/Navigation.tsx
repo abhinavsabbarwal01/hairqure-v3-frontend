@@ -29,7 +29,7 @@ export default function Navigation() {
       data-testid="site-nav"
       className={cn(
         "fixed top-0 inset-x-0 z-40 transition-all duration-300",
-        scrolled ? "backdrop-blur-xl bg-white/95 shadow-soft" : "backdrop-blur-md bg-white/80"
+        scrolled ? "backdrop-blur-xl bg-white/90 shadow-soft border-b border-ink-100" : "bg-transparent"
       )}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 flex h-18 md:h-20 items-center justify-between py-3">
